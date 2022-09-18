@@ -175,3 +175,13 @@ A variant of this testing approach was also used for the Scale vector-thread
 processor at MIT, begun in 2000. Ronny Krashinsky and Christopher Batten were
 the principal architects of the Scale chip. Jeffrey Cohen and Mark Hampton
 developed a version of torture capable of generating vector-thread code.
+
+Multi Thread Experiments
+-----------------------------
+1. Do regular setup (Build master from repository)
+2. checkout mt-experiments
+
+mt-experiments contains (changes can be seen in detail in first commit of the mt-experiments branch):
+- additional mt-benches (mt-simple, mt-tacle)
+- a modified Makefile to build new mt-benches (call with `make ver` in 'riscv-tests/benchmarks')
+- a modified crt.S (I am not sure if this modification is sufficient)
