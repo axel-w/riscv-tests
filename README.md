@@ -180,6 +180,8 @@ Multi Thread Experiments
 -----------------------------
 1. Do regular setup (Build master from repository)
 2. checkout mt-experiments
+3. check and modify line 63 in `benchmarks/Makefile` if needed
+4. call `make ver` in benchmarks (MsgCounter2BigConfig in `VER_DIR` needed)
 
 mt-experiments contains (changes can be seen in detail in first commit of the mt-experiments branch):
 - additional mt-benches (mt-simple, mt-tacle)
