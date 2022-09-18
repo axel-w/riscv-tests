@@ -18,18 +18,21 @@ instbasedir = $(UCB_VLSI_HOME)/install
 #--------------------------------------------------------------------
 
 bmarks = \
-	median \
-	qsort \
-	rsort \
-	towers \
-	vvadd \
-	multiply \
-	mm \
-	dhrystone \
-	spmv \
-	mt-vvadd \
-	mt-matmul \
-	pmp \
+	mt-tacle \
+	mt-simple \
+	# mt-tacle \
+	# median \
+	# qsort \
+	# rsort \
+	# towers \
+	# vvadd \
+	# multiply \
+	# mm \
+	# dhrystone \
+	# spmv \
+	# mt-vvadd \
+	# mt-matmul \
+	# pmp \
 
 #--------------------------------------------------------------------
 # Build rules
@@ -37,11 +40,27 @@ bmarks = \
 
 RISCV_PREFIX ?= riscv$(XLEN)-unknown-elf-
 RISCV_GCC ?= $(RISCV_PREFIX)gcc
+
+# original:
 RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -O2 -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns
+# modified:
+RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -g -O0 -fno-builtin-printf
+
 RISCV_LINK ?= $(RISCV_GCC) -T $(src_dir)/common/test.ld $(incs)
-RISCV_LINK_OPTS ?= -static -nostdlib -nostartfiles -lm -lgcc -T $(src_dir)/common/test.ld
+
+# original:
+# RISCV_LINK_OPTS ?= -static -nostdlib -nostartfiles -lm -lgcc -T $(src_dir)/common/test.ld
+# modified:
+RISCV_LINK_OPTS ?= -static -nostdlib -T $(src_dir)/common/test.ld
+
 RISCV_OBJDUMP ?= $(RISCV_PREFIX)objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data
+
+# original:
 RISCV_SIM ?= spike --isa=rv$(XLEN)gc
+# modified
+RISCV_SIM ?= spike --isa=rv$(XLEN)gc -p2
+
+VER_DIR ?= ~/chipyard/sims/verilator 
 
 incs  += -I$(src_dir)/../env -I$(src_dir)/common $(addprefix -I$(src_dir)/, $(bmarks))
 objs  :=
@@ -59,6 +78,8 @@ $(foreach bmark,$(bmarks),$(eval $(call compile_template,$(bmark))))
 bmarks_riscv_bin  = $(addsuffix .riscv,  $(bmarks))
 bmarks_riscv_dump = $(addsuffix .riscv.dump, $(bmarks))
 bmarks_riscv_out  = $(addsuffix .riscv.out,  $(bmarks))
+bmarks_riscv_ver = $(addsuffix .riscv.ver,  $(bmarks))
+
 
 $(bmarks_riscv_dump): %.riscv.dump: %.riscv
 	$(RISCV_OBJDUMP) $< > $@
@@ -66,8 +87,12 @@ $(bmarks_riscv_dump): %.riscv.dump: %.riscv
 $(bmarks_riscv_out): %.riscv.out: %.riscv
 	$(RISCV_SIM) $< > $@
 
+$(bmarks_riscv_ver): %.riscv.ver: %.riscv
+	$(MAKE) -C $(VER_DIR) SUB_PROJECT=customtop CONFIG=MsgCounter2BigConfig BINARY=$(abspath $<) run-binary > $@
+
 riscv: $(bmarks_riscv_dump)
 run: $(bmarks_riscv_out)
+ver: $(bmarks_riscv_ver)
 
 junk += $(bmarks_riscv_bin) $(bmarks_riscv_dump) $(bmarks_riscv_hex) $(bmarks_riscv_out)
 
