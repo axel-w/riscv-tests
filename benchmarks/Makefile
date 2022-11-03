@@ -42,7 +42,7 @@ RISCV_PREFIX ?= riscv$(XLEN)-unknown-elf-
 RISCV_GCC ?= $(RISCV_PREFIX)gcc
 
 # original:
-RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -O2 -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns
+# RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -O2 -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns
 # modified:
 RISCV_GCC_OPTS ?= -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -g -O0 -fno-builtin-printf
 
@@ -56,7 +56,7 @@ RISCV_LINK_OPTS ?= -static -nostdlib -T $(src_dir)/common/test.ld
 RISCV_OBJDUMP ?= $(RISCV_PREFIX)objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data
 
 # original:
-RISCV_SIM ?= spike --isa=rv$(XLEN)gc
+# RISCV_SIM ?= spike --isa=rv$(XLEN)gc
 # modified
 RISCV_SIM ?= spike --isa=rv$(XLEN)gc -p2
 
