@@ -1,0 +1,17 @@
+c0: binarysearch
+Channel a (in) :                    Get:     9   AcquireBlock:    12
+Channel b (out):             ProbeBlock:     9
+Channel c (in) :               ProbeAck:     3   ProbeAckData:    48
+Channel d (out):          AccessAckData:    72          Grant:     3      GrantData:    72
+
+c1: bitcount
+Channel a (in) :                    Get:    34   AcquireBlock:   114
+Channel b (out):             ProbeBlock:    90
+Channel c (in) :               ProbeAck:    44   ProbeAckData:   368
+Channel d (out):          AccessAckData:   272          Grant:    44      GrantData:   560
+
+c0: binarysearch c1: bitcount
+Channel a (in) :                    Get:    45   AcquireBlock:   157
+Channel b (out):             ProbeBlock:   130
+Channel c (in) :               ProbeAck:    62   ProbeAckData:   544    ReleaseData:    32
+Channel d (out):          AccessAckData:   360          Grant:    62      GrantData:   760     ReleaseAck:     4

@@ -1,19 +1,79 @@
 set pagination off
-file mt-tacle.riscv
+file bitonic-bsort.riscv
 target extended-remote localhost:3333
 set remotetimeout 30000
 load
-b mt-tacle_main.c:224
+b mt-main.c:34
 c
-thread apply 1 c
 thread 1
+set {int}0x200c = 0
 set {int}0x2008 = 0
-x/8dw 0x200c
+x/8dw 0x2010
 set {int}0x2008 = 1
-x/8dw 0x200c
+x/8dw 0x2010
 set {int}0x2008 = 2
-x/8dw 0x200c
+x/8dw 0x2010
 set {int}0x2008 = 3
-x/8dw 0x200c
+x/8dw 0x2010
 set {int}0x2008 = 4
-x/8dw 0x200c
+x/8dw 0x2010
+
+set {int}0x200c = 2
+set {int}0x2008 = 0
+x/8dw 0x2010
+set {int}0x2008 = 1
+x/8dw 0x2010
+set {int}0x2008 = 2
+x/8dw 0x2010
+set {int}0x2008 = 3
+x/8dw 0x2010
+set {int}0x2008 = 4
+x/8dw 0x2010
+
+set {int}0x200c = 4
+set {int}0x2008 = 0
+x/8dw 0x2010
+set {int}0x2008 = 1
+x/8dw 0x2010
+set {int}0x2008 = 2
+x/8dw 0x2010
+set {int}0x2008 = 3
+x/8dw 0x2010
+set {int}0x2008 = 4
+x/8dw 0x2010
+
+set {int}0x200c = 6
+set {int}0x2008 = 0
+x/8dw 0x2010
+set {int}0x2008 = 1
+x/8dw 0x2010
+set {int}0x2008 = 2
+x/8dw 0x2010
+set {int}0x2008 = 3
+x/8dw 0x2010
+set {int}0x2008 = 4
+x/8dw 0x2010
+
+set {int}0x200c = 8
+set {int}0x2008 = 0
+x/8dw 0x2010
+set {int}0x2008 = 1
+x/8dw 0x2010
+set {int}0x2008 = 2
+x/8dw 0x2010
+set {int}0x2008 = 3
+x/8dw 0x2010
+set {int}0x2008 = 4
+x/8dw 0x2010
+
+set {int}0x200c = 9
+set {int}0x2008 = 0
+x/8dw 0x2010
+set {int}0x2008 = 1
+x/8dw 0x2010
+set {int}0x2008 = 2
+x/8dw 0x2010
+set {int}0x2008 = 3
+x/8dw 0x2010
+set {int}0x2008 = 4
+x/8dw 0x2010

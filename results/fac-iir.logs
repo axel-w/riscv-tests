@@ -1,0 +1,36 @@
+c0: iir
+Channel a (in) :                    Get:    14   AcquireBlock:    32
+Channel b (out):             ProbeBlock:    29
+Channel c (in) :               ProbeAck:    13   ProbeAckData:   128    ReleaseData:     8
+Channel d (out):          AccessAckData:   112          Grant:    14      GrantData:   152     ReleaseAck:     1
+
+c1: iir
+Channel a (in) :                    Get:    14   AcquireBlock:    51
+Channel b (out):             ProbeBlock:    48
+Channel c (in) :               ProbeAck:    23   ProbeAckData:   200    ReleaseData:    16
+Channel d (out):          AccessAckData:   112          Grant:    23      GrantData:   224     ReleaseAck:     2
+
+c0: fac
+Channel a (in) :                    Get:     6   AcquireBlock:    12
+Channel b (out):             ProbeBlock:     9
+Channel c (in) :               ProbeAck:     3   ProbeAckData:    48
+Channel d (out):          AccessAckData:    48          Grant:     4      GrantData:    72
+Channel e (in) :               GrantAcc:    13
+
+c1: fac
+Channel a (in) :                    Get:     6   AcquireBlock:    11
+Channel b (out):             ProbeBlock:     8
+Channel c (in) :               ProbeAck:     3   ProbeAckData:    40    ReleaseData:    24
+Channel d (out):          AccessAckData:    48          Grant:     3      GrantData:    64     ReleaseAck:     3
+
+c0: iir c1: fac
+Channel a (in) :                    Get:    18   AcquireBlock:    79
+Channel b (out):             ProbeBlock:    68
+Channel c (in) :               ProbeAck:    32   ProbeAckData:   288    ReleaseData:    56
+Channel d (out):          AccessAckData:   144          Grant:    32      GrantData:   384     ReleaseAck:     7
+
+c0: fac c1: iir
+Channel a (in) :                    Get:    18   AcquireBlock:    75
+Channel b (out):             ProbeBlock:    67
+Channel c (in) :               ProbeAck:    33   ProbeAckData:   272    ReleaseData:    32
+Channel d (out):          AccessAckData:   144          Grant:    33      GrantData:   344     ReleaseAck:     4

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "util.h"
-#include "msg_counter.h"
+#include "msg_logger.h"
 #include "mmio.h"
 
 #pragma GCC optimize ("unroll-loops")
@@ -206,52 +206,22 @@ void thread_entry(int cid, int nc)
   asm volatile("fence");
   barrier(nc);
   if (cid == 0) {
-    start_counter();
+    start_logger();
   }
   barrier(nc);
   
   if (cid == 0) {
-    // task_fac();
+    task_iir();
   }
   if (cid == 1) {
-    task_iir();
+    task_fac();
   }
 
   barrier(nc);
   if (cid == 0) {
-    stop_counter();
+    stop_logger();
   }
   barrier(nc);
-  // if (cid == 0) {
-  //   print_counts();
-  // }
-  // barrier(nc);
-
-  // printf("number of cores: %d \n", nc);
-  // for(int i = 0; i<5; i++) {
-  //   barrier(nc);
-  //   if (cid == 0) {
-  //     reg_write32(0x2000+0x8,i);  
-  //   }
-  //   barrier(nc);
-
-  //   printf("(%d) %c: ", cid, i+97);
-  //   for(int j = 0; j<8; j++) {
-  //       barrier(nc);
-  //       if (cid == 0) {
-  //         count0 = reg_read32(0x2000 + 0xc + j * 0x4);
-  //         printf("%u ", count0);
-  //       }
-  //       barrier(nc);
-  //       if (cid == 1) {
-  //         count1 = reg_read32(0x2000 + 0xc + j * 0x4);
-  //         printf("%u ", count1);
-  //       }
-  //       barrier(nc);
-  //   }
-  //   printf("\n");
-  // }
-
-  // barrier(nc);
+  // print_log();
   exit(0);
 }

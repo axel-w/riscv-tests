@@ -18,8 +18,16 @@ instbasedir = $(UCB_VLSI_HOME)/install
 #--------------------------------------------------------------------
 
 bmarks = \
-	mt-tacle \
-	mt-simple \
+	bitcount-binarysearch\
+	# bitonic-bsort \
+	# mt-tacle2\
+	# mt-faciir\
+	# mt-tacle \
+	# mt-globals-logging\
+	# mt-noprint\
+	# mt-simple \
+	# mt-simple-logging \
+	# mt-tacle-logging \
 	# mt-tacle \
 	# median \
 	# qsort \
